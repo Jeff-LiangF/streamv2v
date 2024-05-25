@@ -167,8 +167,8 @@ class App:
                 }
             )
 
-        if not os.path.exists("public"):
-            os.makedirs("public")
+        if not os.path.exists("./frontend/public"):
+            os.makedirs("./frontend/public")
 
         self.app.mount(
             "/", StaticFiles(directory="./frontend/public", html=True), name="public"
