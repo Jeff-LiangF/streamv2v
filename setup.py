@@ -17,6 +17,7 @@ _deps = [
     "onnxruntime==1.16.3",
     "protobuf==3.20.2",
     "colored",
+    "einops",
     # "pywin32;sys_platform == 'win32'"
 ]
 
@@ -49,7 +50,7 @@ setup(
     long_description=open("README.md", "r", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     keywords="deep learning diffusion pytorch stable diffusion audioldm streamdiffusion real-time",
-    license="Apache 2.0 License",
+    license="UT Austin Research LICENSE",
     author="Feng Liang, Akio Kodaira, Chenfeng Xu, Masayoshi Tomizuka, Kurt Keutzer, Diana Marculescu",
     author_email="jeffliang@utexas.com",
     url="",

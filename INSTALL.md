@@ -4,8 +4,6 @@ The installation guide is inherited from [StreamDiffusion](https://github.com/cu
 
 The initial release only tested the Linux env with conda enviroment.
 
-- [ ] Test pip.
-- [ ] Test venv.
 - [ ] Test Docker.
 - [ ] Test Windows.
 
@@ -17,21 +15,12 @@ git clone
 
 ### Step1: Make Environment
 
-You can install StreamV2V via conda, pip, or Docker(explanation below).
+You can install StreamV2V via conda, or Docker(explanation below).
 
 ```bash
 # Using conda (Recommended)
 conda create -n streamv2v python=3.10
 conda activate streamv2v
-```
-
-```bash
-# Using virtual environment (venv)
-python -m venv .venv
-# Windows
-.\.venv\Scripts\activate
-# Linux
-source .venv/bin/activate
 ```
 
 ### Step2: Install PyTorch and other dependencies
@@ -64,22 +53,14 @@ python -m streamv2v.tools.install-tensorrt
 
 #### For User
 
-Install StreamV2V
-
 ```bash
-#for Latest Version (recommended)
+# for Latest Version (recommended)
 pip install git+https://github.com/Jeff-LiangF/streamv2v.git@main#egg=streamv2v[tensorrt]
-
-#for Stable Version
-pip install streamv2v[tensorrt]
-```
-
-Install TensorRT extension
-
-```bash
+# Install TensorRT extension
 python -m streamv2v.tools.install-tensorrt
 ```
-(Only for Windows) You may need to install pywin32 additionally, if you installed Stable Version(`pip install streamv2v[tensorrt]`).
+
+(Only for Windows) You may need to install pywin32.
 ```bash
 pip install --force-reinstall pywin32
 ```
@@ -87,8 +68,8 @@ pip install --force-reinstall pywin32
 ### Docker Installation (TensorRT Ready)
 
 ```bash
-git clone https://github.com/cumulo-autumn/StreamDiffusion.git
-cd StreamDiffusion
-docker build -t stream-diffusion:latest -f Dockerfile .
-docker run --gpus all -it -v $(pwd):/home/ubuntu/streamdiffusion stream-diffusion:latest
+git clone https://github.com/Jeff-LiangF/streamv2v.git
+cd streamv2v
+docker build -t streamv2v:latest -f Dockerfile .
+docker run --gpus all -it -v $(pwd):/home/ubuntu/streamv2v streamv2v:latest
 ```
