@@ -16,8 +16,8 @@ from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img impo
     retrieve_latents,
 )
 from .image_utils import postprocess_image, forward_backward_consistency_check
-from streamv2v.models.utils import get_nn_latent
-from streamv2v.image_filter import SimilarImageFilter
+from .models.utils import get_nn_latent
+from .image_filter import SimilarImageFilter
 
 
 class StreamV2V:

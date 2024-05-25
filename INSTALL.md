@@ -68,10 +68,10 @@ Install StreamV2V
 
 ```bash
 #for Latest Version (recommended)
-pip install git+https://github.com/cumulo-autumn/StreamDiffusion.git@main#egg=streamdiffusion[tensorrt]
+pip install git+https://github.com/Jeff-LiangF/streamv2v.git@main#egg=streamv2v[tensorrt]
 
 #for Stable Version
-pip install streamdiffusion[tensorrt]
+pip install streamv2v[tensorrt]
 ```
 
 Install TensorRT extension
