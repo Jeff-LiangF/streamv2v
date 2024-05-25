@@ -1,7 +1,5 @@
 # Vid2Vid demo with a camera
 
-[English](./README.md) | [日本語](./README-ja.md) 
-
 [![Video](http://img.youtube.com/vi/k-DmQNjXvxA/0.jpg)](https://www.youtube.com/watch?v=k-DmQNjXvxA)
 
 This example, based on this [MPJEG server](https://github.com/radames/Real-Time-Latent-Consistency-Model/), runs image-to-image with a live webcam feed or screen capture on a web browser.
@@ -57,17 +55,6 @@ chmod +x start.sh
 ```
 
 then open `http://0.0.0.0:7860` in your browser.
-
-
-### Running with Docker (NOT TESTED)
-
-```bash
-docker build -t img2img .
-docker run -ti -e ENGINE_DIR=/data -e HF_HOME=/data -v ~/.cache/huggingface:/data  -p 7860:7860 --gpus all img2img
-```
-
-Where `ENGINE_DIR` and `HF_HOME` set a local cache directory, making it faster to restart the docker container.
-
 
 ### Common bugs
 
