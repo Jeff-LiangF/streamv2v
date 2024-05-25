@@ -25,7 +25,7 @@ page_content = """<h1 class="text-3xl font-bold">StreamV2V</h1>
 <p class="text-sm">
     This demo showcases
     <a
-    href=""
+    href="https://jeff-liangf.github.io/projects/streamv2v/"
     target="_blank"
     class="text-blue-500 underline hover:no-underline">StreamV2V
 </a>
@@ -42,7 +42,7 @@ href="https://huggingface.co/runwayml/stable-diffusion-v1-5"
     target="_blank"
     class="text-blue-500 underline hover:no-underline">SD 1.5</a
     >. We also build in <a
-    href=""
+    href="https://github.com/Jeff-LiangF/streamv2v/tree/main/demo_w_camera#download-lora-weights-for-better-stylization"
     target="_blank"
     class="text-blue-500 underline hover:no-underline">some LORAs
 </a> for better stylization.
