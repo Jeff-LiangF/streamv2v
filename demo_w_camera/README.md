@@ -2,7 +2,9 @@
 
 [![Video](http://img.youtube.com/vi/k-DmQNjXvxA/0.jpg)](https://www.youtube.com/watch?v=k-DmQNjXvxA)
 
-This example, based on this [MPJEG server](https://github.com/radames/Real-Time-Latent-Consistency-Model/), runs image-to-image with a live webcam feed or screen capture on a web browser.
+This example, based on this [MPJEG server](https://github.com/radames/Real-Time-Latent-Consistency-Model/), runs video-to-video with a live webcam feed or screen capture on a web browser.
+
+Tested with VSCode with remote GPU server. The Live Server extension would help to open the local Chorme page.
 
 ## Usage
 

@@ -33,7 +33,7 @@ Please see the [installation guide](./INSTALL.md).
 
 Please see [getting started instruction](./vid2vid/README.md).
 
-## Realtime camera demo on local GPU
+## Realtime camera demo on GPU
 
 Please see the [demo with camera guide](./demo_w_camera/README.md).
 
