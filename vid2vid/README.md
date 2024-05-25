@@ -68,3 +68,16 @@ python main.py --input ./demo_selfie/jeff_1.mp4 --prompt "Claymation, a man is g
 # By default, it is 4.
 python main.py --input ./demo_selfie/jeff_1.mp4 --prompt "Claymation, a man is giving a talk." --diffusion_steps 1 --output_dir outputs_steps
 ```
+
+### Common Bugs
+
+#### ImportError Issue
+- **Error Message**: `ImportError: cannot import name 'packaging' from 'pkg_resources'`.
+- **Related GitHub Issue**: [setuptools issue #4961](https://github.com/vllm-project/vllm/issues/4961)
+
+**Potential Workaround**:  
+Downgrade the setuptools package to resolve this issue. You can do this by running the following command in your terminal:
+
+```bash
+pip install setuptools==69.5.1
+```

@@ -56,6 +56,11 @@ chmod +x start.sh
 
 then open `http://0.0.0.0:7860` in your browser.
 
-### Common bugs
+### Common Bugs
 
-- Camera not enabled: annot read properties of undefined (reading 'enumerateDevices'). Related issues: [No webcam](https://github.com/radames/Real-Time-Latent-Consistency-Model/issues/17)
+#### Camera Not Enabled Issue
+- **Error Message**: `Cannot read properties of undefined (reading 'enumerateDevices')`.
+- **Related GitHub Issue**: [No webcam detected](https://github.com/radames/Real-Time-Latent-Consistency-Model/issues/17)
+
+**Potential Workaround**:  
+This issue occurs when the camera is not allowed for the web browser. Add ```http://localhost:7860,http://0.0.0.0:7860``` to [chorme setting](https://github.com/radames/Real-Time-Latent-Consistency-Model/issues/17#issuecomment-1811957196).
