@@ -9,10 +9,7 @@ output/
 result_lcm.png
 model.ckpt
 *.png
-!assets/img2img_example.png
-!assets/cfg_conparision.png
-!images/inputs/input.png
-!static/
+!./demo_w_camera/frontend/static/favicon.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
