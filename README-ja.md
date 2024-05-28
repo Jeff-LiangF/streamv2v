@@ -17,7 +17,7 @@
 
 ## ハイライト
 
-私たちのStreamV2Vは、4090TI GPUでリアルタイムのビデオ・ツー・ビデオ翻訳を実行することができます。[動画](https://www.youtube.com/watch?v=k-DmQNjXvxA)をチェックして、[自分で試してみてください](./demo_w_camera/README.md)！
+私たちのStreamV2Vは、RTX 4090 GPUでリアルタイムのビデオ・ツー・ビデオ翻訳を実行することができます。[動画](https://www.youtube.com/watch?v=k-DmQNjXvxA)をチェックして、[自分で試してみてください](./demo_w_camera/README.md)！
 
 [![Video](http://img.youtube.com/vi/k-DmQNjXvxA/0.jpg)](https://www.youtube.com/watch?v=k-DmQNjXvxA)
 

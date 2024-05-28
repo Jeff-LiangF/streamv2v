@@ -17,7 +17,7 @@
 
 ## 亮点
 
-我们的StreamV2V可以在一块4090TI GPU上实时执行视频到视频的翻译。查看[视频](https://www.youtube.com/watch?v=k-DmQNjXvxA)并[亲自尝试](./demo_w_camera/README.md)！
+我们的StreamV2V可以在一块RTX 4090 GPU上实时执行视频到视频的翻译。查看[视频](https://www.youtube.com/watch?v=k-DmQNjXvxA)并[亲自尝试](./demo_w_camera/README.md)！
 
 [![Video](http://img.youtube.com/vi/k-DmQNjXvxA/0.jpg)](https://www.youtube.com/watch?v=k-DmQNjXvxA)
 
