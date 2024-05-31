@@ -2,7 +2,7 @@
 
 [English](./README.md) | [中文](./README-cn.md) | [日本語](./README-ja.md)
 
-**[Looking Backward: Streaming Video-to-Video Translation with Feature Banks]()**
+**[Looking Backward: Streaming Video-to-Video Translation with Feature Banks](https://jeff-liangf.github.io/projects/streamv2v/)**
 <br/>
 [Feng Liang](https://jeff-liangf.github.io/),
 [Akio Kodaira](https://scholar.google.co.jp/citations?user=15X3cioAAAAJ&hl=en),
@@ -12,8 +12,9 @@
 [Diana Marculescu](https://www.ece.utexas.edu/people/faculty/diana-marculescu)
 <br/>
 
-[![arXiv](https://img.shields.io/badge/arXiv-2312.17681-b31b1b.svg)](https://arxiv.org/abs/2312.17681)
+[![arXiv](https://img.shields.io/badge/arXiv-2405.15757-b31b1b.svg)](https://arxiv.org/abs/2405.15757)
 [![Project Page](https://img.shields.io/badge/Project-Website-orange)](https://jeff-liangf.github.io/projects/streamv2v/)
+[![Huggingface demo](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/JeffLiang/streamv2v)
 
 ## Highlight 
 
@@ -50,7 +51,12 @@ Our StreamV2V is highly dependended on the open-source community. Our code is co
 If you use StreamV2V in your research or wish to refer to the baseline results published in the paper, please use the following BibTeX entry.
 
 ```BibTeX
-StreamV2V TBA
+@article{liang2024looking,
+  title={Looking Backward: Streaming Video-to-Video Translation with Feature Banks},
+  author={Liang, Feng and Kodaira, Akio and Xu, Chenfeng and Tomizuka, Masayoshi and Keutzer, Kurt and Marculescu, Diana},
+  journal={arXiv preprint arXiv:2405.15757},
+  year={2024}
+}
 
 @article{kodaira2023streamdiffusion,
   title={StreamDiffusion: A Pipeline-level Solution for Real-time Interactive Generation},

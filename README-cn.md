@@ -12,8 +12,10 @@
 [Diana Marculescu](https://www.ece.utexas.edu/people/faculty/diana-marculescu)
 <br/>
 
-[![arXiv](https://img.shields.io/badge/arXiv-2312.17681-b31b1b.svg)](https://arxiv.org/abs/2312.17681)
+[![arXiv](https://img.shields.io/badge/arXiv-2405.15757-b31b1b.svg)](https://arxiv.org/abs/2405.15757)
 [![项目页面](https://img.shields.io/badge/Project-Website-orange)](https://jeff-liangf.github.io/projects/streamv2v/)
+[![Huggingface演示](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/JeffLiang/streamv2v)
+
 
 ## 亮点
 
@@ -50,7 +52,12 @@ StreamV2V在很大程度上依赖于开源社区。我们的代码是从[StreamD
 如果您在研究中使用StreamV2V或希望引用论文中发布的基准结果，请使用以下BibTeX条目。
 
 ```BibTeX
-StreamV2V TBA
+@article{liang2024looking,
+  title={Looking Backward: Streaming Video-to-Video Translation with Feature Banks},
+  author={Liang, Feng and Kodaira, Akio and Xu, Chenfeng and Tomizuka, Masayoshi and Keutzer, Kurt and Marculescu, Diana},
+  journal={arXiv preprint arXiv:2405.15757},
+  year={2024}
+}
 
 @article{kodaira2023streamdiffusion,
   title={StreamDiffusion: A Pipeline-level Solution for Real-time Interactive Generation},
@@ -58,3 +65,4 @@ StreamV2V TBA
   journal={arXiv preprint arXiv:2312.12491},
   year={2023}
 }
+```

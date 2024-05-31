@@ -1,6 +1,6 @@
 ## Installation
 
-The installation guide is inherited from [StreamDiffusion](https://github.com/cumulo-autumn/StreamDiffusion?tab=readme-ov-file#installation). If you already have the streamdiffusion env installed, it would also work for streamv2v.
+The installation guide is inherited from [StreamDiffusion](https://github.com/cumulo-autumn/StreamDiffusion?tab=readme-ov-file#installation).
 
 The initial release only tested the Linux env with conda/Docker enviroment.
 
