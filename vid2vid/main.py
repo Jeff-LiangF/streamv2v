@@ -113,6 +113,7 @@ def main(
 
     stream = StreamV2VWrapper(
         model_id_or_path=model_id,
+        mode="img2img",
         t_index_list=t_index_list,
         frame_buffer_size=1,
         width=width,

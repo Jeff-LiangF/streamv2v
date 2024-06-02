@@ -27,6 +27,7 @@ class StreamV2VWrapper:
         t_index_list: List[int],
         lora_dict: Optional[Dict[str, float]] = None,
         output_type: Literal["pil", "pt", "np", "latent"] = "pil",
+        mode: Literal["img2img", "txt2img"] = "img2img",
         lcm_lora_id: Optional[str] = None,
         vae_id: Optional[str] = None,
         device: Literal["cpu", "cuda"] = "cuda",
@@ -44,7 +45,7 @@ class StreamV2VWrapper:
         similar_image_filter_threshold: float = 0.98,
         similar_image_filter_max_skip_frame: int = 10,
         use_denoising_batch: bool = True,
-        cfg_type: Literal["none", "full", "self", "initialize"] = "self",
+        cfg_type: Literal["none", "full", "self", "initialize"] = "none",
         use_cached_attn: bool = True,
         use_feature_injection: bool = True,
         feature_injection_strength: float = 0.8,
@@ -73,6 +74,8 @@ class StreamV2VWrapper:
             by default None. Example: {'LoRA_1': 0.5, 'LoRA_2': 0.7, ...}
         output_type : Literal["pil", "pt", "np", "latent"], optional
             The type of output image, by default "pil".
+        mode : Literal["img2img", "txt2img"], optional
+            txt2img or img2img, by default "img2img".
         lcm_lora_id : Optional[str], optional
             The identifier for the LCM-LoRA to load, by default None.
             If None, the default LCM-LoRA ("latent-consistency/lcm-lora-sdv1-5") is used.
@@ -141,7 +144,22 @@ class StreamV2VWrapper:
         # TODO: Test SD turbo
         self.sd_turbo = "turbo" in model_id_or_path
 
-        assert use_denoising_batch, "vid2vid mode must use denoising batch for now."
+        if mode == "txt2img":
+            if cfg_type != "none":
+                raise ValueError(
+                    f"txt2img mode accepts only cfg_type = 'none', but got {cfg_type}"
+                )
+            if use_denoising_batch and frame_buffer_size > 1:
+                if not self.sd_turbo:
+                    raise ValueError(
+                        "txt2img mode cannot use denoising batch with frame_buffer_size > 1."
+                    )
+        if mode == "img2img":
+            if not use_denoising_batch:
+                raise NotImplementedError(
+                    "vid2vid mode must use denoising batch for now."
+                )
+        self.mode = mode
 
         self.device = device
         self.dtype = dtype
@@ -197,7 +215,7 @@ class StreamV2VWrapper:
         prompt: str,
         negative_prompt: str = "",
         num_inference_steps: int = 50,
-        guidance_scale: float = 1.2,
+        guidance_scale: float = 1.0,
         delta: float = 1.0,
     ) -> None:
         """
@@ -210,7 +228,7 @@ class StreamV2VWrapper:
         num_inference_steps : int, optional
             The number of inference steps to perform, by default 50.
         guidance_scale : float, optional
-            The guidance scale to use, by default 1.2.
+            The guidance scale to use, by default 1.0.
         delta : float, optional
             The delta multiplier of virtual residual noise,
             by default 1.0.
@@ -225,11 +243,11 @@ class StreamV2VWrapper:
 
     def __call__(
         self,
-        image: Union[str, Image.Image, torch.Tensor],
+        image: Optional[Union[str, Image.Image, torch.Tensor]] = None,
         prompt: Optional[str] = None,
     ) -> Union[Image.Image, List[Image.Image]]:
         """
-        Performs img2img
+       Performs img2img or txt2img based on the mode.
 
         Parameters
         ----------
@@ -243,7 +261,45 @@ class StreamV2VWrapper:
         Union[Image.Image, List[Image.Image]]
             The generated image.
         """
-        return self.img2img(image, prompt)
+        if self.mode == "img2img":
+            return self.img2img(image, prompt)
+        else:
+            return self.txt2img(prompt)
+
+    def txt2img(
+        self, prompt: Optional[str] = None
+    ) -> Union[Image.Image, List[Image.Image], torch.Tensor, np.ndarray]:
+        """
+        Performs txt2img.
+        Parameters
+        ----------
+        prompt : Optional[str]
+            The prompt to generate images from.
+        Returns
+        -------
+        Union[Image.Image, List[Image.Image]]
+            The generated image.
+        """
+        if prompt is not None:
+            self.stream.update_prompt(prompt)
+
+        if self.sd_turbo:
+            image_tensor = self.stream.txt2img_sd_turbo(self.batch_size)
+        else:
+            image_tensor = self.stream.txt2img(self.frame_buffer_size)
+        image = self.postprocess_image(image_tensor, output_type=self.output_type)
+
+        if self.use_safety_checker:
+            safety_checker_input = self.feature_extractor(
+                image, return_tensors="pt"
+            ).to(self.device)
+            _, has_nsfw_concept = self.safety_checker(
+                images=image_tensor.to(self.dtype),
+                clip_input=safety_checker_input.pixel_values.to(self.dtype),
+            )
+            image = self.nsfw_fallback_img if has_nsfw_concept[0] else image
+
+        return image
 
     def img2img(
         self, image: Union[str, Image.Image, torch.Tensor], prompt: Optional[str] = None
@@ -511,9 +567,9 @@ class StreamV2VWrapper:
                 ):
                     maybe_path = Path(model_id_or_path)
                     if maybe_path.exists():
-                        return f"{maybe_path.stem}--lcm_lora-{use_lcm_lora}--tiny_vae-{use_tiny_vae}--max_batch-{max_batch_size}--min_batch-{min_batch_size}--cache--{self.use_cached_attn}"
+                        return f"{maybe_path.stem}--lcm_lora-{use_lcm_lora}--tiny_vae-{use_tiny_vae}--max_batch-{max_batch_size}--min_batch-{min_batch_size}--cache--{self.use_cached_attn}--mode-{self.mode}"
                     else:
-                        return f"{model_id_or_path}--lcm_lora-{use_lcm_lora}--tiny_vae-{use_tiny_vae}--max_batch-{max_batch_size}--min_batch-{min_batch_size}--cache--{self.use_cached_attn}"
+                        return f"{model_id_or_path}--lcm_lora-{use_lcm_lora}--tiny_vae-{use_tiny_vae}--max_batch-{max_batch_size}--min_batch-{min_batch_size}--cache--{self.use_cached_attn}--mode-{self.mode}"
 
                 engine_dir = Path(engine_dir)
                 unet_path = os.path.join(
@@ -640,7 +696,7 @@ class StreamV2VWrapper:
             "",
             "",
             num_inference_steps=50,
-            guidance_scale=1.1
+            guidance_scale=1.2
             if stream.cfg_type in ["full", "self", "initialize"]
             else 1.0,
             generator=torch.manual_seed(seed),

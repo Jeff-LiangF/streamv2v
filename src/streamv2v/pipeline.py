@@ -493,3 +493,30 @@ class StreamV2V:
         inference_time = start.elapsed_time(end) / 1000
         self.inference_time_ema = 0.9 * self.inference_time_ema + 0.1 * inference_time
         return x_output
+
+    @torch.no_grad()
+    def txt2img(self, batch_size: int = 1) -> torch.Tensor:
+        x_0_pred_out = self.predict_x0_batch(
+            torch.randn((batch_size, 4, self.latent_height, self.latent_width)).to(
+                device=self.device, dtype=self.dtype
+            )
+        )
+        x_output = self.decode_image(x_0_pred_out).detach().clone()
+        return x_output
+
+    def txt2img_sd_turbo(self, batch_size: int = 1) -> torch.Tensor:
+        x_t_latent = torch.randn(
+            (batch_size, 4, self.latent_height, self.latent_width),
+            device=self.device,
+            dtype=self.dtype,
+        )
+        model_pred = self.unet(
+            x_t_latent,
+            self.sub_timesteps_tensor,
+            encoder_hidden_states=self.prompt_embeds,
+            return_dict=False,
+        )[0]
+        x_0_pred_out = (
+            x_t_latent - self.beta_prod_t_sqrt * model_pred
+        ) / self.alpha_prod_t_sqrt
+        return self.decode_image(x_0_pred_out)
