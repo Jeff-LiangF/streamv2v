@@ -19,8 +19,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from utils.wrapper import StreamV2VWrapper
 
-
-base_model = "runwayml/stable-diffusion-v1-5"
+base_model = "stabilityai/sd-turbo"
 
 logger = logging.getLogger("uvicorn")
 PROJECT_DIR = Path(__file__).parent.parent
@@ -63,22 +62,22 @@ class Api:
         self.config = config
         self.stream = StreamV2VWrapper(
             model_id_or_path=base_model,
-            t_index_list=[0, 16, 32, 45],
+            t_index_list=[0],
             mode='txt2img',
             frame_buffer_size=1,
             warmup=10,
             acceleration=config.acceleration,
             do_add_noise=True,
             output_type="pil",
-            use_denoising_batch=True,
+            use_denoising_batch=False,
             use_cached_attn=True,
             use_feature_injection=True,
             feature_injection_strength=0.8,
             feature_similarity_threshold=0.98,
             cache_interval=1,
-            cache_maxframes=1,
-            use_tome_cache=True,
-            cfg_type="none"
+            cache_maxframes=4,
+            use_tome_cache=False,
+            cfg_type="none",
             seed=1,
         )
 
@@ -101,6 +100,7 @@ class Api:
         self._predict_lock = asyncio.Lock()
         self._update_prompt_lock = asyncio.Lock()
 
+    
     async def _predict(self, inp: PredictInputModel) -> PredictResponseModel:
         """
         Predict an image and return.
@@ -116,7 +116,7 @@ class Api:
             The prediction result.
         """
         async with self._predict_lock:
-            return PredictResponseModel(base64_image=self._pil_to_base64(self.stream_diffusion(prompt=inp.prompt)))
+            return PredictResponseModel(base64_image=self._pil_to_base64(self.stream(prompt=inp.prompt)))
 
     def _pil_to_base64(self, image: Image.Image, format: str = "JPEG") -> bytes:
         """

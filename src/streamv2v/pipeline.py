@@ -83,8 +83,6 @@ class StreamV2V:
         self.unet = pipe.unet
         self.vae = pipe.vae
 
-        self.flow_model = raft_small(pretrained=True, progress=False).to(device=pipe.device).eval()
-
         self.cached_x_t_latent = deque(maxlen=4)
 
         self.inference_time_ema = 0
@@ -496,20 +494,12 @@ class StreamV2V:
 
     @torch.no_grad()
     def txt2img(self, batch_size: int = 1) -> torch.Tensor:
-        x_0_pred_out = self.predict_x0_batch(
-            torch.randn((batch_size, 4, self.latent_height, self.latent_width)).to(
-                device=self.device, dtype=self.dtype
-            )
-        )
+        x_0_pred_out = self.predict_x0_batch(self.init_noise[0:1])
         x_output = self.decode_image(x_0_pred_out).detach().clone()
         return x_output
 
     def txt2img_sd_turbo(self, batch_size: int = 1) -> torch.Tensor:
-        x_t_latent = torch.randn(
-            (batch_size, 4, self.latent_height, self.latent_width),
-            device=self.device,
-            dtype=self.dtype,
-        )
+        x_t_latent = self.init_noise[0:1]
         model_pred = self.unet(
             x_t_latent,
             self.sub_timesteps_tensor,

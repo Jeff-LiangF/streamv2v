@@ -38,6 +38,10 @@ Please see [getting started instruction](./vid2vid/README.md).
 
 Please see the [demo with camera guide](./demo_w_camera/README.md).
 
+## Continuous txt2img 
+
+Please see the [demo continuous txt2img](./demo_continuous_txt2img/README.md).
+
 ## LICENSE
 
 StreamV2V is licensed under a [UT Austin Research LICENSE](./LICENSE).

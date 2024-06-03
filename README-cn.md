@@ -39,6 +39,10 @@
 
 请查看[带摄像头的演示指南](./demo_w_camera/README.md)。
 
+## 连续的文生图
+
+请查看[连续的文生图的演示指南](./demo_continuous_txt2img/README.md).
+
 ## 许可证
 
 StreamV2V根据[德克萨斯大学奥斯汀分校研究许可证](./LICENSE)进行许可。

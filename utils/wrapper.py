@@ -6,7 +6,7 @@ from typing import List, Literal, Optional, Union, Dict
 
 import numpy as np
 import torch
-from diffusers import AutoencoderTiny, StableDiffusionPipeline
+from diffusers import AutoencoderTiny, StableDiffusionPipeline, StableDiffusionXLPipeline
 from diffusers.models.attention_processor import XFormersAttnProcessor, AttnProcessor2_0
 from PIL import Image
 
@@ -143,6 +143,7 @@ class StreamV2VWrapper:
         """
         # TODO: Test SD turbo
         self.sd_turbo = "turbo" in model_id_or_path
+        self.sd_xl = "xl" in model_id_or_path
 
         if mode == "txt2img":
             if cfg_type != "none":
@@ -448,20 +449,30 @@ class StreamV2VWrapper:
             The loaded model.
         """
 
-        try:  # Load from local directory
-            pipe: StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(
-                model_id_or_path,
-            ).to(device=self.device, dtype=self.dtype)
+        # Choose the pipeline based on the flag
+        pipeline_cls = StableDiffusionXLPipeline if self.sd_xl else StableDiffusionPipeline
 
-        except ValueError:  # Load from huggingface
-            pipe: StableDiffusionPipeline = StableDiffusionPipeline.from_single_file(
-                model_id_or_path,
-            ).to(device=self.device, dtype=self.dtype)
-        except Exception:  # No model found
+        try:
+            # Attempt to load the model from a local directory
+            pipe = pipeline_cls.from_pretrained(model_id_or_path).to(device=self.device, dtype=self.dtype)
+        except ValueError:
+            # If the model is not found locally, load from Hugging Face
+            try:
+                pipe = pipeline_cls.from_single_file(model_id_or_path).to(device=self.device, dtype=self.dtype)
+            except Exception as e:
+                logging.error(f"Failed to load model from Hugging Face: {e}")
+                sys.exit("Model load has failed from both local and Hugging Face sources.")
+        except Exception as e:
+            # Handle unexpected errors
+            logging.error(f"Unexpected error occurred: {e}")
             traceback.print_exc()
-            print("Model load has failed. Doesn't exist.")
-            exit()
+            sys.exit("Model load has failed due to an unexpected error.")
 
+        if self.sd_xl:
+            # Avoid error if "text_embeds" not in added_cond_kwargs: TypeError: argument of type 'NoneType' is not iterable
+            # https://github.com/huggingface/diffusers/issues/4649
+            pipe.unet.config.addition_embed_type = None
+            
         stream = StreamV2V(
             pipe=pipe,
             t_index_list=t_index_list,
