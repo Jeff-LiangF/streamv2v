@@ -26,6 +26,10 @@
 
 [![Video](http://img.youtube.com/vi/N9dx6c8HKBo/0.jpg)](https://www.youtube.com/watch?v=N9dx6c8HKBo)
 
+StreamV2Vはvid2vidタスクのために設計されていますが、txt2imgアプリケーションとシームレスに統合できます。各画像ごとのStreamDiffusionと比較して、StreamV2Vは**継続的に**テキストから画像を生成し、よりスムーズな移行を提供します。 [ビデオ](https://www.youtube.com/watch?v=kFmA0ytcEoA)をチェックして、[自分で試してみてください](./demo_continuous_txt2img/README.md)!
+
+[![Video](http://img.youtube.com/vi/kFmA0ytcEoA/0.jpg)](https://www.youtube.com/watch?v=kFmA0ytcEoA)
+
 ## インストール
 
 [インストールガイド](./INSTALL.md)をご覧ください。

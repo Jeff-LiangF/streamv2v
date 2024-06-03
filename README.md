@@ -26,6 +26,10 @@ For functionality, our StreamV2V supports face swap (e.g., to Elon Musk or Will 
 
 [![Video](http://img.youtube.com/vi/N9dx6c8HKBo/0.jpg)](https://www.youtube.com/watch?v=N9dx6c8HKBo)
 
+Although StreamV2V is designed for the vid2vid task, it could seamlessly integrate with the txt2img application. Compared with per-image StreamDiffusion, StreamV2V **continuously** generates images from texts, providing a much smoother transition. Check the [video](https://www.youtube.com/watch?v=kFmA0ytcEoA) and [try it by yourself](./demo_continuous_txt2img/README.md)!
+
+[![Video](http://img.youtube.com/vi/kFmA0ytcEoA/0.jpg)](https://www.youtube.com/watch?v=kFmA0ytcEoA)
+
 ## Installation
 
 Please see the [installation guide](./INSTALL.md).

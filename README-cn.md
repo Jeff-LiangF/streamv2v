@@ -27,6 +27,10 @@
 
 [![Video](http://img.youtube.com/vi/N9dx6c8HKBo/0.jpg)](https://www.youtube.com/watch?v=N9dx6c8HKBo)
 
+尽管StreamV2V是为vid2vid任务设计的，但它可以无缝集成到txt2img应用程序中。与每图像的StreamDiffusion相比，StreamV2V **连续地**从文本生成图像，提供了更加平滑的过渡。查看[视频](https://www.youtube.com/watch?v=kFmA0ytcEoA)并[亲自试试](./demo_continuous_txt2img/README.md)!
+
+[![Video](http://img.youtube.com/vi/kFmA0ytcEoA/0.jpg)](https://www.youtube.com/watch?v=kFmA0ytcEoA)
+
 ## 安装
 
 请查看[安装指南](./INSTALL.md)。
