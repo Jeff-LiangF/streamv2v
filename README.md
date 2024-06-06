@@ -18,7 +18,7 @@
 
 ## Highlight 
 
-Our StreamV2V could perform real-time video-2-video translation on one RTX 4090 GPU. Check the [video](https://www.youtube.com/watch?v=k-DmQNjXvxA) and [try it by youself](./demo_w_camera/README.md)!
+Our StreamV2V could perform real-time video-2-video translation on one RTX 4090 GPU. Check the [video](https://www.youtube.com/watch?v=k-DmQNjXvxA) and [try it by yourself](./demo_w_camera/README.md)!
 
 [![Video](http://img.youtube.com/vi/k-DmQNjXvxA/0.jpg)](https://www.youtube.com/watch?v=k-DmQNjXvxA)
 
