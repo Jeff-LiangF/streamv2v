@@ -50,6 +50,10 @@ python batch_eval.py --json_file ./demo_selfie/eval_jeff_lorastyle.json # Styliz
 
 CAUTION: The `--acceleration tensorrt` option is NOT SUPPORTED! I did try to accelerate the model with TensorRT, but due to the dynamic nature of the feature bank, I didn't succeed. If you are an expert on this, please contact me (jeffliang@utexas.edu) and we could discuss how to include you as a contributor. 
 
+
+Of course, you can also use the front-end page provided by Gradio. You need to execute `pip install gradio` to install `gradio` and start it using `python main_gr.py`
+
+
 ### Ablation study using command
 
 ```bash
