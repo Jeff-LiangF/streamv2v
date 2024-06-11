@@ -25,7 +25,7 @@ style_options = {
 
 def process_video(input_path, prompt, selected_keyword, scale=1.0, guidance_scale=1.0, diffusion_steps=4, noise_strength=0.4, acceleration="xformers", use_denoising_batch=True, use_cached_attn=True, use_feature_injection=True, feature_injection_strength=0.8, feature_similarity_threshold=0.98, cache_interval=4, cache_maxframes=1, use_tome_cache=True, do_add_noise=True, enable_similar_image_filter=False, seed=2):
     output_dir = os.path.join(CURRENT_DIR, "outputs")
-    model_id: str = "runwayml/stable-diffusion-v1-5",
+    model_id: str = "runwayml/stable-diffusion-v1-5"
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
     
@@ -135,7 +135,7 @@ iface = gr.Interface(
         gr.Slider(minimum=0.1, maximum=1.0, value=0.8, label="Feature Injection Strength"),
         gr.Slider(minimum=0.1, maximum=1.0, value=0.98, label="Feature Similarity Threshold"),
         gr.Slider(minimum=1, maximum=10, value=4, step=1, label="Cache Interval"),
-        gr.Slider(minimum=1, maximum=10, value=1, step=1, label="Cache Max Frames"),
+        gr.Slider(minimum=1, maximum=10, value=1, step=1, label="Cache Max Frames (If want to use > 1, set Token Merging as False)"),
         gr.Checkbox(value=True, label="Use Token Merging Cache"),
         gr.Checkbox(value=True, label="Do Add Noise"),
         gr.Checkbox(value=False, label="Enable Similar Image Filter"),
