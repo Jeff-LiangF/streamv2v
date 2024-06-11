@@ -73,3 +73,9 @@ If you use StreamV2V in your research or wish to refer to the baseline results p
   year={2023}
 }
 ```
+
+## Contributors
+
+<a href="https://github.com/Jeff-LiangF/streamv2v/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Jeff-LiangF/streamv2v" />
+</a>
