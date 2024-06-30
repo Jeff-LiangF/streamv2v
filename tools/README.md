@@ -1,4 +1,4 @@
-- Calculating WarpError and CLIPScore
+## Calculating WarpError and CLIPScore
 
 CAUTION: All quantitative metrics like WarpError and CLIPScore are reference-only. Users shall not treat them as golden standards to indiate the quality of the generated videos. 
 
