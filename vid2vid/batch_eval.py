@@ -26,7 +26,7 @@ for item in data:
     try:
         model_id = item["model_id"]
     except:
-        model_id = "runwayml/stable-diffusion-v1-5"
+        model_id = "Jiali/stable-diffusion-1.5"
     command = [
         'python', "main.py",
         "--input", f"{file_path}/{src_vid_name}.mp4",

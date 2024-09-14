@@ -19,7 +19,7 @@ def main(
     input: str,
     prompt: str,
     output_dir: str = os.path.join(CURRENT_DIR, "outputs"),
-    model_id: str = "runwayml/stable-diffusion-v1-5",
+    model_id: str = "Jiali/stable-diffusion-1.5",
     scale: float = 1.0,
     guidance_scale: float = 1.0,
     diffusion_steps: int = 4,

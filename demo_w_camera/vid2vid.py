@@ -17,7 +17,8 @@ from pydantic import BaseModel, Field
 from PIL import Image
 import math
 
-base_model = "runwayml/stable-diffusion-v1-5"
+# base_model = "runwayml/stable-diffusion-v1-5"
+base_model = "Jiali/stable-diffusion-1.5"
 
 default_prompt = "A man is talking"
 
