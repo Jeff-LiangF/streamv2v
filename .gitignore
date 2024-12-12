@@ -1,5 +1,6 @@
 # https://github.com/github/gitignore/blob/main/Python.gitignore
 
+vid2vid/demo_selfie/*
 .vscode/
 engines/
 output/
