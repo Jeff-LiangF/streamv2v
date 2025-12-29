@@ -18,6 +18,7 @@ from .image_utils import postprocess_image, forward_backward_consistency_check
 from .models.utils import get_nn_latent
 from .image_filter import SimilarImageFilter
 
+torchbackend = torch.mps if torch.backends.mps.is_available() else torch.cuda
 
 class StreamV2V:
     def __init__(
@@ -485,8 +486,8 @@ class StreamV2V:
     def __call__(
         self, x: Union[torch.Tensor, PIL.Image.Image, np.ndarray] = None
     ) -> torch.Tensor:
-        start = torch.cuda.Event(enable_timing=True)
-        end = torch.cuda.Event(enable_timing=True)
+        start = torchbackend.Event(enable_timing=True)
+        end = torchbackend.Event(enable_timing=True)
         start.record()
         if x is not None:
             x = self.image_processor.preprocess(x, self.height, self.width).to(
@@ -508,7 +509,7 @@ class StreamV2V:
 
         self.prev_image_result = x_output
         end.record()
-        torch.cuda.synchronize()
+        torchbackend.synchronize()
         inference_time = start.elapsed_time(end) / 1000
         self.inference_time_ema = 0.9 * self.inference_time_ema + 0.1 * inference_time
         return x_output

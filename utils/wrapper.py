@@ -17,8 +17,9 @@ from streamv2v.acceleration.tensorrt import UNet2DConditionModelV2V
 from streamv2v.models.attention_processor import CachedSTXFormersAttnProcessor, CachedSTAttnProcessor2_0, CachedSTAttnProcessorTRT2_0
 
 torch.set_grad_enabled(False)
-torch.backends.cuda.matmul.allow_tf32 = True
-torch.backends.cudnn.allow_tf32 = True
+if torch.cuda.is_available():
+    torch.backends.cuda.matmul.allow_tf32 = True
+    torch.backends.cudnn.allow_tf32 = True
 
 
 class StreamV2VWrapper:
